@@ -3,11 +3,13 @@
 #！@时间：2019-02-27 15:45
 #!@Filename:mysql导出明细.py
 
-import pymysql
 import csv
-with open('1.csv','a',newline='',encoding='utf-8') as f:
-    writer=csv.writer(f,delimiter=' ')
-    writer.writerow(
+
+import pymysql
+
+f=open('1.csv','a',newline='',encoding='utf-8')
+writer=csv.writer(f)
+writer.writerow(
         ['开票日期', '分机号', '发票代码', '发票号码', '开票类型', '原发票代码', '原发票号码', '发票行性质', '项目名称', '规格类型', '单位', '项目数量', '项目单价', '项目金额',
          '税率', '税额', '商品编码', '订单合计金额', '订单价税合计', '订单合计税额', '备注', '购货方名称', '购货方纳税人识别号', '购货方地址电话', '购货方银行账号', '开票人',
          '收款人', '复核人', '开票月份'])
@@ -47,14 +49,18 @@ WHERE A.serial_num=B.serial_num AND nsrsbh='91441302324755813B' AND kprq BETWEEN
 '''
 
 try:
+    n=0
     cursor.execute(sql)
     print('Count:', cursor.rowcount)  # 符合条件的数据条数
-    row = cursor.fetchone()
-    while row:
-        print(row[0],row[1])
+    while n < cursor.rowcount:
+        n +=1
         row = cursor.fetchone()
-        #writer.writerow([row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11],row[12],row[13],row[14],row[15],row[16],row[17],row[18],row[19],row[20],row[21],row[22],row[23],row[24],row[25],row[26],row[27],row[28]])
-
+        str_date=row[0].strftime("%Y-%m-%d %H:%M:%S")
+        # print(type(str_date))
+        # print(str_date)
+        writer.writerow([str_date,row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8],row[9],row[10],row[11],row[12],row[13],row[14],row[15],row[16],row[17],row[18],row[19],row[20],row[21],row[22],row[23],row[24],row[25],row[26],row[27],row[28]])
+        print(row)
 except:
     db.rollback()
     print('发生错误')
+f.close()
