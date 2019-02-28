@@ -7,7 +7,7 @@ import csv
 
 import pymysql
 
-f=open('1.csv','a',newline='',encoding='utf-8')
+f=open('914403007966376128.csv','a',newline='',encoding='utf-8')
 writer=csv.writer(f)
 writer.writerow(
         ['开票日期', '分机号', '发票代码', '发票号码', '开票类型', '原发票代码', '原发票号码', '发票行性质', '项目名称', '规格类型', '单位', '项目数量', '项目单价', '项目金额',
@@ -45,7 +45,7 @@ A.skr AS 收款人,
 A.fhr AS 复核人,
 DATE_FORMAT(kprq,'%Y%m') AS 开票月份 
 FROM invoice_info A,invoice_info_mx B 
-WHERE A.serial_num=B.serial_num AND nsrsbh='91441302324755813B' AND kprq BETWEEN '2019-02-01 00:00:00'AND'2019-02-28 23:59:59' ORDER BY kprq
+WHERE A.serial_num=B.serial_num AND nsrsbh='914403007966376128' AND kprq BETWEEN '2019-02-01 00:00:00'AND'2019-02-28 23:59:59' ORDER BY kprq
 '''
 
 try:

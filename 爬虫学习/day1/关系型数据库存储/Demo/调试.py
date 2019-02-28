@@ -36,9 +36,18 @@
 #         ['开票日期', '分机号', '发票代码', '发票号码', '开票类型', '原发票代码', '原发票号码', '发票行性质', '项目名称', '规格类型', '单位', '项目数量', '项目单价', '项目金额',
 #          '税率', '税额', '商品编码', '订单合计金额', '订单价税合计', '订单合计税额', '备注', '购货方名称', '购货方纳税人识别号', '购货方地址电话', '购货方银行账号', '开票人',
 #          '收款人', '复核人', '开票月份'])
-keys=''
-for i in range(26):
-    key="row[%d]"%(i)
+# keys=''
+# for i in range(26):
+#     key="row[%d]"%(i)
+#
+#     keys +=key+','
+#     print(keys)
+import os
 
-    keys +=key+','
-    print(keys)
+guande={'广东广安冠德石化有限公司珠海和平界冲加油站':'91440400MA4UWXMX67'}
+for i in guande:
+    name=i
+    print(name)
+    os.mkdir('C:/Users/xiao/Desktop/数据导出/{dicname}'.format(dicname=name))
+    with open('C:/Users/xiao/Desktop/数据导出/{dicname}/{shuihao}.csv'.format(dicname=name,shuihao=name),'a',encoding='utf-8') as f:
+        f.write("this is a test")
