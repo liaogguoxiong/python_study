@@ -44,10 +44,12 @@
 #     print(keys)
 import os
 
-guande={'广东广安冠德石化有限公司珠海和平界冲加油站':'91440400MA4UWXMX67'}
-for i in guande:
-    name=i
-    print(name)
-    os.mkdir('C:/Users/xiao/Desktop/数据导出/{dicname}'.format(dicname=name))
-    with open('C:/Users/xiao/Desktop/数据导出/{dicname}/{shuihao}.csv'.format(dicname=name,shuihao=name),'a',encoding='utf-8') as f:
-        f.write("this is a test")
+# guande={'广东广安冠德石化有限公司珠海和平界冲加油站':'91440400MA4UWXMX67'}
+# for i in guande:
+#     name=i
+#     print(name)
+#     os.mkdir('C:/Users/xiao/Desktop/数据导出/{dicname}'.format(dicname=name))
+#     with open('C:/Users/xiao/Desktop/数据导出/{dicname}/{shuihao}.csv'.format(dicname=name,shuihao=name),'a',encoding='utf-8') as f:
+#         f.write("this is a test")
+
+os.mkdir('C:/Users/xiao/Desktop/数据导出/冠德')
