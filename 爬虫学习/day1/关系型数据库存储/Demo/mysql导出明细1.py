@@ -47,7 +47,7 @@ def output_data(ip,db_name,port,shuihao,company_name):
             continue
         #print(sql)
         #os.mkdir('C:/Users/xiao/Desktop/数据导出/{company_name}/开票明细'.format(company_name=company_name))
-        f = open('C:/Users/xiao/Desktop/数据导出/{company_name}/开票明细/{filename}.csv'.format(company_name=company_name,filename=name), 'a', newline='', encoding='utf-8')
+        f = open('C:/Users/xiao/Desktop/数据导出/{company_name}/开票明细/{filename}.csv'.format(company_name=company_name,filename=name), 'a', newline='', encoding='utf-8-sig')
         writer = csv.writer(f)
         writer.writerow(
             ['开票日期', '分机号', '发票代码', '发票号码', '开票类型', '原发票代码', '原发票号码', '发票行性质', '项目名称', '规格类型', '单位', '项目数量', '项目单价', '项目金额',
