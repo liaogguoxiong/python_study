@@ -1,15 +1,19 @@
 #Program:还是讲列表的用法，之前讲的是浅复制，现在使用copy模块来进行深复制
 #History:lgx    2018/10/17      Second revision
-'''
+
 a=[1,2,3]
 b=a
-a[1]=555
-print(b)#搞不懂改了a列表，b列表也改变。可能这个也是浅复制
-'''
+a.remove(1)
+print(b)#搞不懂改了a列表，b列表也改变。可能这个也是浅复制,个人觉得应该a赋值给b列表,只是把地址给了b
+print(a)
+
+
 import copy
 names=['zsy','lgx','wdy','feige',[1,2]]
 names_cp=copy.copy(names)#其实相当于[列表].copy,是浅复制
 print(names_cp)
+
+
 #深复制，复制和之前列表完全一样的
 # 不会因为列表的改变而改变
 names_deepcp=copy.deepcopy(names)

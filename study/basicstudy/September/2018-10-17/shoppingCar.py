@@ -13,16 +13,16 @@ goods_list=[
 shoppingCarList=[]
 balance=float(input("请输入您的余额："))
 while True:
-    print("商品编号", '商品名称', '价格')
+    print("商品编号\t\t商品名称\t\t价格")
     for index,item in enumerate(goods_list):
-        print(index,item)
+        print(index,"\t\t",item[0],"\t\t",item[1])
     time.sleep(1)
     uc=input('请输入您要购买的商品编号：')#uc=userchoice
-    if uc.isdigit():
+    if uc.isdigit():   #判断输入的是不是是不是整数
         uc=int(uc)
-        if uc > -1 and uc < len(goods_list):
+        if uc > -1 and uc < len(goods_list): #
             goods=goods_list[uc]
-            if balance >= goods[1]:
+            if balance >= goods[1]:   #如果余额大于商品价格,则可以购买
                 balance-=goods[1]
             else:
                 time.sleep(1)

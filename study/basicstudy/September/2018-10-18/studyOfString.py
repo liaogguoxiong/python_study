@@ -4,16 +4,15 @@ print(name.capitalize())#首字母大写
 print(name.count('l'))#得出某个字母在字符串中的个数
 print(name.center(50,'#'))
 print(name.encode())
-print(name.endswith('al'))#以什么结尾,可用来做判断
+print(name.endswith('l'))#以什么结尾,可用来做判断
 print(name.find('is'))#找出指定字符的位置
-print('woshi'.isidentifier())#标识符，判断是否合法
-print('+'.join(['1','2','3']))
+print('^woshi'.isidentifier())#标识符，判断是否合法,及命名行不行
+print('+'.join(['1','2','3']))#以+来好拼接字符
 print('abc'.upper())#把小写转化成大写
 print('ABC'.lower())#把大写转化成小写
-print('\n    nihao')
 print('\n    nihao'.lstrip())#去掉左边的空格和换行
-print('      nihao\n')#去掉右边的空格和换行
-print('\n    nihao \n    '.strip())#去掉erbian的的空格和换行
+print('nihao    \n'.rstrip())#去掉右边的空格和换行
+print('\n    nihao \n    '.strip())#去掉二边的的空格和换行
 p=str.maketrans('hailgx','123456')#p是转化规则
 print('hellonihaoalgx'.translate(p))
 print('alex li'.replace('l','L',1))#替换字符，其实1为替换多少个

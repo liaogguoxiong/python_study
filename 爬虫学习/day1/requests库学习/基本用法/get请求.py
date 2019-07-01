@@ -16,12 +16,14 @@ url='http://httpbin.org/get'
 
 r=requests.get(url)
 #输出response的内容
+print(type(r))
 print(r.text)
 
 #######基本实例
 
 ######添加参数
 
+print("="*50)
 data={
 
     'name':"lgx",
@@ -33,6 +35,8 @@ print(r.text)
 print(type(r.text))
 ######添加参数
 
+print("="*50)
+
 ######response返回内容处理
 
 '''
@@ -42,8 +46,10 @@ print(type(r.text))
 print('######response返回内容处理')
 r=requests.get(url)
 print(type(r.text))
-print(r.json())
-print(type(r.json()))
+cont=r.json()
+print(type(cont))
+print(r.text)
+print(cont['headers']['Host'])
 
 ######response返回内容处理
 

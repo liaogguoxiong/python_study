@@ -8,5 +8,5 @@ url='https://github.com/favicon.ico'
 r=requests.get(url)
 print(r.text)
 print(r.content)
-with open('C:/Users/xiao/Desktop/picture/icon.ico','wb') as f:
-    f.write(r.content)
+# with open('C:/Users/xiao/Desktop/picture/icon.ico','wb') as f:
+#     f.write(r.content)

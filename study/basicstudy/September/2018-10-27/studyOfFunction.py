@@ -10,7 +10,7 @@ test1(num)
 def log():
     time_format="%Y-%m-%d %X"#时间格式,%X指时分秒
     time_current=time.strftime(time_format)#获取当前时间
-    with open('a.txt','a+') as f:#模式为a+即追加写模式，就可以不断地写入，如果为w模式则会覆盖
+    with open('a.txt','a') as f:#模式为a+即追加写模式，就可以不断地写入，如果为w模式则会覆盖
         f.write('%s: end action\n' %time_current)
 
 
@@ -30,6 +30,7 @@ def test3():
 x=test1()
 y=test2()
 z=test3()
+print("不带参数的函数".center(50,'#'))
 print(x)
 print(y)
 print(z)
@@ -39,7 +40,7 @@ print(z)
 def test_arg(x,y):
     print(x)
     print(y)
-
+print("带参数的函数".center(50,'#'))
 test_arg(1,2)#与形参一一对应
 test_arg(y=2,x=1)#可以不与形参一一对应
 #test_arg(1,x=1)#因为一一对应，第一个传入的参数为x，就相当于x的参数传入了2个，没有一一对应
@@ -52,7 +53,7 @@ def test_default(x,y=2):#y为默认
     print(y)
 
 #参数组，当传入的参数不确定时候，不用写形参，使用参数组,只接受位置参数
-
+print("参数组".center(50,'#'))
 def test_argrp(*args):
     print(args)
 
@@ -63,6 +64,7 @@ test_argrp(*[1,2,3,4,5,12,3,4,5])
 
 def test_dic(**kwargs):
     print(kwargs)
+print("参数为字典的函数".center(50,'#'))
 test_dic(name='lgx',age=22)
 test_dic(**{'name':"lgx",'age':22})
 
@@ -73,4 +75,5 @@ def test_mix(name,age=18,*args,**kwargs):
     print(age)
     print(args)
     print(kwargs)
+print("多重模式形参混合".center(50,'#'))
 test_mix("lgx",22,1,1,2,3,1,name1='lgx',sex="m",age1='22')

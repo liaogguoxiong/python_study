@@ -42,32 +42,32 @@ def main():
     res_book=get_info_book(web_url,book_reg)
     print(res_book)
     #每个小说目录url
-    book_url=res_book[0][1]
-    #捕获小说目录的正则表达式
-    catalog_reg='<dd.*?href="(.*?)".*?title="(.*?)">'
-    #把小说目录页面的url和捕获小说目录的正则表达式传入,可获得目录信息
-    book_catalog=get_info_book(book_url,catalog_reg)
-    #获取最新5章小说内容的url地址,即把相同的url加上书的编号
-    for i in book_catalog[-5:]:
-        #相同的url加上书的编号
-        content_url=base_url+i[0]
-        print(content_url)
-        #把小说内容的url存入列表
-        content_url_list.append(content_url)
-    #捕获小说内容的正则表达式
-    content_reg='<meta\sname="keywords"\scontent="(.*?)">.*?<div\sid="content">(.*?)</div>'
-    #循环输出小说的内容
-    with open("C:/Users/xiao/Desktop/三寸人间.txt", 'w', encoding='utf-8') as f:
-        f.write("")
-    for url in content_url_list:
-        content_res=get_info_book(url,content_reg)
-        print(content_res[0][0][5:])
-        book_content1 = re.sub('<.*?;', "\n", content_res[0][1])
-        book_content2 = re.sub('&.*?;', "", book_content1)
-        print(book_content2)
-        with open("C:/Users/xiao/Desktop/三寸人间.txt", 'a', encoding='utf-8') as f:
-            f.write(content_res[0][0][5:]+'\n')
-            f.write(book_content2)
+    # book_url=res_book[0][1]
+    # #捕获小说目录的正则表达式
+    # catalog_reg='<dd.*?href="(.*?)".*?title="(.*?)">'
+    # #把小说目录页面的url和捕获小说目录的正则表达式传入,可获得目录信息
+    # book_catalog=get_info_book(book_url,catalog_reg)
+    # #获取最新5章小说内容的url地址,即把相同的url加上书的编号
+    # for i in book_catalog[-5:]:
+    #     #相同的url加上书的编号
+    #     content_url=base_url+i[0]
+    #     print(content_url)
+    #     #把小说内容的url存入列表
+    #     content_url_list.append(content_url)
+    # #捕获小说内容的正则表达式
+    # content_reg='<meta\sname="keywords"\scontent="(.*?)">.*?<div\sid="content">(.*?)</div>'
+    # #循环输出小说的内容
+    # with open("C:/Users/xiao/Desktop/三寸人间.txt", 'w', encoding='utf-8') as f:
+    #     f.write("")
+    # for url in content_url_list:
+    #     content_res=get_info_book(url,content_reg)
+    #     print(content_res[0][0][5:])
+    #     book_content1 = re.sub('<.*?;', "\n", content_res[0][1])
+    #     book_content2 = re.sub('&.*?;', "", book_content1)
+    #     print(book_content2)
+    #     with open("C:/Users/xiao/Desktop/三寸人间.txt", 'a', encoding='utf-8') as f:
+    #         f.write(content_res[0][0][5:]+'\n')
+    #         f.write(book_content2)
 
 if __name__ == '__main__':
     main()

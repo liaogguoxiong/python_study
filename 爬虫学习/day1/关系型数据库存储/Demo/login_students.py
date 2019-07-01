@@ -10,9 +10,13 @@
 import pymysql
 
 class MYSQL():
+
     def __init__(self,db_name):
+
         self.database_name=db_name
+
     def create_db(self):
+
         db=pymysql.connect(host='localhost',user='root',password='li@o0121',port=3306)
         cursor=db.cursor()
         sql='create database {db_name} default character set utf8'.format(db_name=self.database_name)

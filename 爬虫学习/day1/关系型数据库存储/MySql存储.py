@@ -8,7 +8,7 @@
 '''
 import pymysql
 
-# db=pymysql.connect(host='localhost',user='root',password='li@o0121',port=3306)  #连接数据库
+db=pymysql.connect(host='localhost',user='root',password='li@o0121',port=3306)  #连接数据库
 # cursor=db.cursor()      #使用cursor()方法来获取mysql操作游标,利用游标来执行sql语句
 # cursor.execute('SELECT VERSION()')              #执行mysql语句
 # data=cursor.fetchone()                          #使用fetchone方法获取第一条数据

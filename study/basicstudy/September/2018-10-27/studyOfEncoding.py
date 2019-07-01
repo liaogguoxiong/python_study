@@ -1,6 +1,7 @@
 #今天学习字符转编码操作
 import  sys
-print(sys.getdefaultencoding())#获取系统默认编码,通过实测默认编码好像是unicode
+print("系统默认编码".center(50,'#'))
+print(sys.getdefaultencoding())#获取系统默认编码,通过实测默认编码是unicode
 s="你好"
 print(type(s))
 #把utf-8格式的字符转为gbk格式
@@ -10,3 +11,4 @@ print(s_utf_8,type(s_utf_8))
 print(s_gbk,type(s_gbk))
 print(s_gbk.decode("gbk"))#把gbk格式解码为unicode
 #s_utf8=s_unicode.encode("gbk")
+print(s_utf_8.decode())

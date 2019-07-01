@@ -6,6 +6,8 @@ import pymysql
 import csv,os
 
 def output_data(ip,db_name,port,shuihao,company_name):
+    #创建多重目录,如果目录不存在则创建,存在不报错
+    os.makedirs('C:/Users/lgx/Desktop/数据导出/{company_name}/开票明细'.format(company_name=company_name),exist_ok=True)
     #连接数据库
     db = pymysql.connect(host=ip, user='root', password='A_isino#888', port=port, db=db_name)
     #使用cursor()方法来获取mysql操作游标,利用游标来执行sql语句
@@ -43,16 +45,15 @@ def output_data(ip,db_name,port,shuihao,company_name):
         A.fhr AS 复核人,
         DATE_FORMAT(kprq,'%Y%m') AS 开票月份 
         FROM invoice_info A,invoice_info_mx B 
-        WHERE A.serial_num=B.serial_num AND nsrsbh='{shuihao}' AND kprq BETWEEN '2019-02-01 00:00:00'AND'2019-02-28 23:59:59' ORDER BY kprq
+        WHERE A.serial_num=B.serial_num AND nsrsbh='{shuihao}' AND kprq BETWEEN '2019-06-01 00:00:00'AND'2019-06-30 23:59:59' ORDER BY kprq
         '''.format(shuihao=shuihao[name])
         #如果某个税号已经导出过了,不会再导出
-        if os.path.exists('C:/Users/xiao/Desktop/数据导出/{company_name}/开票明细/{filename}.csv'.format(company_name=company_name,filename=name)):
+        if os.path.exists('C:/Users/lgx/Desktop/数据导出/{company_name}/开票明细/{filename}.csv'.format(company_name=company_name,filename=name)):
             print('%s已经存在'%name)
             continue
         #print(sql)
-        #os.mkdir('C:/Users/xiao/Desktop/数据导出/{company_name}/开票明细'.format(company_name=company_name))
         #!!!!坑:使用utf-8编码导出的csv文件,用excel打开是乱码,用utf-8-sig才行
-        f = open('C:/Users/xiao/Desktop/数据导出/{company_name}/开票明细/{filename}.csv'.format(company_name=company_name,filename=name), 'a', newline='', encoding='utf-8-sig')
+        f = open('C:/Users/lgx/Desktop/数据导出/{company_name}/开票明细/{filename}.csv'.format(company_name=company_name,filename=name), 'a', newline='', encoding='utf-8-sig')
         writer = csv.writer(f)
         writer.writerow(
             ['开票日期', '分机号', '发票代码', '发票号码', '开票类型', '原发票代码', '原发票号码', '发票行性质', '项目名称', '规格类型', '单位', '项目数量', '项目单价', '项目金额',
@@ -62,10 +63,10 @@ def output_data(ip,db_name,port,shuihao,company_name):
             n = 0
             cursor.execute(sql)
             print('Count:', cursor.rowcount)  # 符合条件的数据条数
-            while n < cursor.rowcount:
+            while n < cursor.rowcount:        #输出所有的数据
                 n += 1
-                row = cursor.fetchone()
-                str_date = row[0].strftime("%Y-%m-%d %H:%M:%S")
+                row = cursor.fetchone()      #执行sql语句的结果,是个列表
+                str_date = row[0].strftime("%Y-%m-%d %H:%M:%S") #数据库获取的是时间戳
                 # print(type(str_date))
                 # print(str_date)
                 writer.writerow(
@@ -103,6 +104,11 @@ def main():
     }
     output_data('192.168.20.54','dzfp_zzs_kpfw_arm',3306,guande,'冠德')
 
+    huarun={'华润网络（深圳）有限公司':'91440300MA5DK1T202'}
+
+    output_data('192.168.20.54', 'dzfp_zzs_kpfw_arm', 3306, huarun, '华润')
+
+
 
 
     '''
@@ -112,9 +118,62 @@ def main():
     guande1={
                 '济南鉴德石油化工有限公司':'91370103787448537Q',
                 '山东中惠泽石油有限公司':'91370103575478769F'
+
     }
     output_data('192.168.20.54','dzfp_zzs_kpfw_arm_sign',3306,guande1,'冠德')
 
+    zhongwaiyun={
+
+        '广东中外运报关有限公司黄埔分公司': '914401123047015781'
+    }
+
+    output_data('192.168.20.54','dzfp_zzs_kpfw_arm_sign',3306,zhongwaiyun,'中外运')
+
+    wendemu={
+        '深圳市昌盛投资发展有限公司温德姆至尊酒店': '9144030030628267XA'
+    }
+
+    output_data('192.168.20.54', 'dzfp_zzs_kpfw_arm_sign', 3306, wendemu, '温德姆')
+
+
+    '''
+    ip:192.168.20.193   端口:3306 数据库:dzfp_zzs_kpfw_arm
+    '''
+
+    jieshun6={
+        '深圳桑达物业发展有限公司':'91440300192221050R',
+        '深圳市东华物业管理有限公司':'914403001922278073',
+        '太原市君威物业管理有限公司':'91140100060729485D',
+        '太原市玉龙物业管理有限公司':'91140100060736757K',
+        '南京新丽华投资发展有限公司':'913201050579905942',
+        '深圳市赛格物业管理有限公司赛格工业园停车场':'91440300MA5ENFWQ16',
+        '厦门市融坤房地产开发有限公司':'913502006123137294',
+        '深圳天安智慧园区运营有限公司龙岗分公司':'91440300665881965G',
+        '武汉中商鹏程销品茂管理有限公司':'91420100731088034Y',
+        '深圳市润丰不动产运营服务有限公司':'91440300088288060K',
+        '太原市石林物业发展有限公司长风街分公司':'91140105068025722R',
+        '湖南华天物业管理有限责任公司':'914300007170519726'
+    }
+    output_data('192.168.20.193','dzfp_zzs_kpfw_arm',3306,jieshun6,'捷顺')
+
+    guande2={
+        '成都鸿浩加气站有限公司':'915101325535515157'
+    }
+    output_data('192.168.20.193','dzfp_zzs_kpfw_arm',3306,guande2,'冠德')
+
+    jieshun5={
+        '广东省机场管理集团有限公司惠州机场公司': '91441300579725878W',
+        '深圳巴士集团股份有限公司公交大厦停车场': '91440300760469493D'
+    }
+
+    output_data('192.168.20.193', 'dzfp_zzs_kpfw_arm', 3306, jieshun5, '捷顺')
+
+    rencai={
+        '深圳市人才集团有限公司': '914403006925252451',
+        '深圳市人才服务中心（深圳市人才大市场）': '12440300564206418J'
+    }
+
+    output_data('192.168.20.193', 'dzfp_zzs_kpfw_arm', 3306, rencai, '人才市场')
 
 
     '''
@@ -168,14 +227,28 @@ def main():
         '天津盛信商业管理有限公司':'911201046661165952',
         '汇隆置业（杭州）有限公司':'913301000609543240',
         '同泰电子实业（深圳）有限公司同泰总部产业园停车场':'91440300MA5EYXLP2X'
+
+
     }
     output_data('192.168.20.40', 'dzfp_zzs_kpfw_arm', 3306, jieshun4, '捷顺')
 
+    tianyin={
+        '天音通信有限公司': '91440300279293591L'
+    }
+
+    output_data('192.168.20.40', 'dzfp_zzs_kpfw_arm', 3306, tianyin, '天音')
+
+
 
     # mysqlIP：192.168.20.54/端口3306/Schema：dzfp_zzs_kpfw_arm
-    chuoqi={'绰琪服装（深圳）有限公司':'914403007966376128',
-            '深圳市房地产中介协会':'51440300671855317J'}
+    chuoqi={'绰琪服装（深圳）有限公司':'914403007966376128'
+            }
     output_data('192.168.20.54','dzfp_zzs_kpfw_arm',3306,chuoqi,'绰琪')
+
+    fangdichang={
+        '深圳市房地产中介协会': '51440300671855317J'
+    }
+    output_data('192.168.20.54', 'dzfp_zzs_kpfw_arm', 3306, fangdichang, '房地产')
 
     # mysqlIP：192.168.20.40/端口3306/Schema：dzfp_zzs_kpfw_arm
     huaqiaocheng={
@@ -188,6 +261,20 @@ def main():
         '深圳分期乐贸易有限公司':'91440300MA5DRNEM7D'
     }
     output_data('192.168.20.40','dzfp_zzs_kpfw_arm',3306,fenqile,'分期乐')
+
+    #mysqlIP:192.168.20.173/端口:3306/数据库:dzfp_zzs_kpfw_arm
+    huaqiaocheng={
+        '北京华侨城物业服务有限公司':'91110105761426081E'
+    }
+    output_data('192.168.20.173','dzfp_zzs_kpfw_arm',3306,huaqiaocheng,'华侨城')
+
+    #mysqlIP:192.168.20.197/端口:3306/数据库:dzfp_zzs_kpfw_arm
+
+    jieshun7={
+        '深圳市赛格康乐企业发展有限公司':'91440300192182944B',
+        '南京兴智科技产业发展有限公司':'913201925894178441'
+    }
+    output_data('192.168.20.197','dzfp_zzs_kpfw_arm',3306,jieshun7,'捷顺')
 
 
 

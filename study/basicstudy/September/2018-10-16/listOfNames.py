@@ -41,7 +41,6 @@ names[2]="wyl"
 print(names)
 '''
 #copy方法的使用
-print(names)
 names_copy=names.copy()#复制name列表
 print(names_copy)
 names[3]="mengguofei"#修改names下标为3点元素，names2的没变

@@ -18,7 +18,7 @@ print(__num.__next__())#一般使用循环输出生成器中的元素
 """
 举例，斐波拉契数列来说明生成器
 """
-
+print("=="*25)
 def fib(num):
     a,b,n=0,1,0
     while n < num:

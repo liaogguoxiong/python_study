@@ -5,4 +5,3 @@ for i in goodslist:
     print(j,'.',i)
     j+=1
 
-print(a)

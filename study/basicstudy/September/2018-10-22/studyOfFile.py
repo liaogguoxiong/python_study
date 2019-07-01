@@ -8,7 +8,7 @@ print("重新打印一遍________+",f.read())#第一次读句柄(相当于光标
 
 
 #写模式,如果文件之前存在,会覆盖掉,相当于创建一个新文件,需要注意
-f=open('study2','a',encoding='utf-8')
+f=open('study2','w',encoding='utf-8')
 f.write("\n我爱我家,我爱我滴家乡\n")#向文件中读入
 f.write("哪里有我最爱的银")
 

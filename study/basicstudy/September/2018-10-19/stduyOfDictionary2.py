@@ -13,11 +13,15 @@ video={
     1:5
 }
 print(books)
+print("--"*50)
 print(books['仙侠']['liugongyu'][0])
+print("--"*50)
 books['都市']['lgx'][1]=100
 print(books)
+print("--"*50)
 #把字典的所有的值打印出来
 print(books.values())
+print("--"*50)
 #把字典的key打印出来
 print(books.keys())
 #通过检查key是否存在,如果存在那能原值不变,否则更新新值

@@ -16,5 +16,6 @@ headers={
 r=requests.get(url,headers=headers)
 print(r.status_code)
 pattern=re.compile('explore-feed.*?question_link.*>(.*?)</a>',re.S)
+print(pattern)
 titles=re.findall(pattern,r.text)
 print(titles)

@@ -37,7 +37,6 @@ def get_info_book(url,reg):
     #     else:
     #         print(res.status_code)
     #         print('出错了,继续请求!!!')
-    time.sleep(5)
     res = requests.get(url, headers=headers)
     res.encoding = res.apparent_encoding  # 让res.text正确解码网页内容
     if res.status_code == 200:
@@ -81,7 +80,7 @@ def main():
             print(content_url)
             content_url_list.append(content_url)
     print(content_url_list)
-    with open("C:/Users/xiao/Desktop/圣墟.txt", 'w') as f:    #因为只需要捕获每天更新的章节,所以每次运行先清空再写入
+    with open("圣墟.txt", 'w') as f:    #因为只需要捕获每天更新的章节,所以每次运行先清空再写入
         f.write("")
     i=0
     for url in content_url_list:
@@ -95,11 +94,11 @@ def main():
         res3=re.sub('\u3000\u3000','',res2)
         res_content=re.sub('<br /><br />','\n',res3)
         if i <= 4:
-            with open("C:/Users/xiao/Desktop/圣墟.txt", 'w',encoding='utf-8') as f:
+            with open("圣墟.txt", 'w',encoding='utf-8') as f:
                 f.write(res1[0][0]+'\n')
                 f.write(res_content)
         else:
-            with open("C:/Users/xiao/Desktop/三寸人间.txt", 'w',encoding='utf-8') as f:
+            with open("三寸人间.txt", 'w',encoding='utf-8') as f:
                 f.write(res1[0][0]+'\n')
                 f.write(res_content)
         i += 1

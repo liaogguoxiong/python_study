@@ -7,11 +7,11 @@ import selenium.webdriver
 import time
 from PIL import Image,ImageEnhance
 import pytesseract
-for i in range(1):
+for i in range(10):
     driver=selenium.webdriver.Chrome()
     url='http://192.168.20.57:9081/zzs_kpfw_manager/login.htm'
     driver.get(url)
-    save_pic_path="C:/Users/xiao/Desktop/picture/pic.png"
+    save_pic_path="C:/Users/lgx/Desktop/验证码/%d.png"%(i)
     driver.implicitly_wait(1)
     driver.save_screenshot(save_pic_path)
     location=driver.find_element_by_id('gencode').location
@@ -30,5 +30,5 @@ for i in range(1):
     bottom=int(bottom)
 
     img=Image.open(save_pic_path).crop((left,top,right,bottom))
-    img.save("C:/Users/xiao/Desktop/picture/pic1.png")
+    img.save("C:/Users/lgx/Desktop/验证码/%d_1.png"%(i))
     print("获得%d张验证码素材"%i)

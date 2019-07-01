@@ -31,10 +31,10 @@ html='''
 '''
 soup=BS(html,'lxml')
 print(soup)
-print(soup.title.string)        #获取网页中的标题的内容
+print("获取网页中的标题的内容:",soup.title.string)        #获取网页中的标题的内容
 print(soup.li)
 print(soup.a.string)
-print(soup.title.name)          #获取节点的名字
+print("获取节点的名字:",soup.title.name)          #获取节点的名字
 print(soup.li.attrs)            #获取li节点的所有属性
 print(soup.p['name'])           #获取p节点name属性的值
 print('______________________________________________')
