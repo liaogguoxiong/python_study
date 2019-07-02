@@ -8,8 +8,15 @@
 '''
 import pymysql,os
 from openpyxl import Workbook
+import datetime
 
 def output_data(ip,db_name,port,shuihao,company_name):
+
+    year=datetime.datetime.now().year
+    #因为导数据是导上个月的,所以要减去1
+    month=datetime.datetime.now().month-1
+    if month == 0:
+        month=12
     wb = Workbook()
     ws = wb.active
     #创建多重目录,如果目录不存在则创建,存在不报错
@@ -51,8 +58,8 @@ def output_data(ip,db_name,port,shuihao,company_name):
         A.fhr AS 复核人,
         DATE_FORMAT(kprq,'%Y%m') AS 开票月份 
         FROM invoice_info A,invoice_info_mx B 
-        WHERE A.serial_num=B.serial_num AND nsrsbh='{shuihao}' AND kprq BETWEEN '2019-06-01 00:00:00'AND'2019-06-31 23:59:59' ORDER BY kprq
-        '''.format(shuihao=shuihao[name])
+        WHERE A.serial_num=B.serial_num AND nsrsbh='{shuihao}' AND kprq BETWEEN '{s_YEAR}-{s_MONTH}-01 00:00:00'AND'{e_YEAR}-{e_MONTH}-31 23:59:59' ORDER BY kprq
+        '''.format(shuihao=shuihao[name],s_YEAR=year,s_MONTH=month,e_YEAR=year,e_MONTH=month)
         #如果某个税号已经导出过了,不会再导出
         if os.path.exists('C:/Users/lgx/Desktop/数据导出/{company_name}/开票明细/{filename}.xlsx'.format(company_name=company_name,filename=name)):
             print('%s已经存在'%name)
