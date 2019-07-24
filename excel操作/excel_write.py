@@ -10,6 +10,7 @@ import pymysql,os
 from openpyxl import Workbook
 import datetime
 
+
 def output_data(ip,db_name,port,shuihao,company_name):
 
     year=datetime.datetime.now().year
@@ -20,7 +21,7 @@ def output_data(ip,db_name,port,shuihao,company_name):
     wb = Workbook()
     ws = wb.active
     #创建多重目录,如果目录不存在则创建,存在不报错
-    os.makedirs('C:/Users/lgx/Desktop/数据导出/{company_name}/开票明细'.format(company_name=company_name),exist_ok=True)
+    os.makedirs('C:/Users/lgx/Desktop/数据导出/{n}月开票明细/{company_name}/开票明细'.format(n=month,company_name=company_name),exist_ok=True)
     #连接数据库
     db = pymysql.connect(host=ip, user='root', password='A_isino#888', port=port, db=db_name)
     #使用cursor()方法来获取mysql操作游标,利用游标来执行sql语句
@@ -61,7 +62,7 @@ def output_data(ip,db_name,port,shuihao,company_name):
         WHERE A.serial_num=B.serial_num AND nsrsbh='{shuihao}' AND kprq BETWEEN '{s_YEAR}-{s_MONTH}-01 00:00:00'AND'{e_YEAR}-{e_MONTH}-31 23:59:59' ORDER BY kprq
         '''.format(shuihao=shuihao[name],s_YEAR=year,s_MONTH=month,e_YEAR=year,e_MONTH=month)
         #如果某个税号已经导出过了,不会再导出
-        if os.path.exists('C:/Users/lgx/Desktop/数据导出/{company_name}/开票明细/{filename}.xlsx'.format(company_name=company_name,filename=name)):
+        if os.path.exists('C:/Users/lgx/Desktop/数据导出/{n}月开票明细/{company_name}/开票明细/{filename}.xlsx'.format(n=month,company_name=company_name,filename=name)):
             print('%s已经存在'%name)
             continue
         #print(sql)
@@ -70,26 +71,24 @@ def output_data(ip,db_name,port,shuihao,company_name):
              '收款人', '复核人', '开票月份']
         ws.append(title)
 
-        try:
-            n = 0
-            cursor.execute(sql)
-            print('Count:', cursor.rowcount)  # 符合条件的数据条数
-            while n < cursor.rowcount:        #输出所有的数据
-                n += 1
-                row = cursor.fetchone()      #执行sql语句的结果,是个列表
-                str_date = row[0].strftime("%Y-%m-%d %H:%M:%S") #数据库获取的是时间戳
-                # print(type(str_date))
-                # print(str_date)
-                ws.append(
-                    [str_date, row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11],
-                     row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[21], row[22],
-                     row[23], row[24], row[25], row[26], row[27], row[28]])
-                print("已经导入",n)
-            wb.save('C:/Users/lgx/Desktop/数据导出/{company_name}/开票明细/{filename}.xlsx'.format(company_name=company_name,filename=name))
-            print('%s导出完毕!'%name)
-        except:
-            db.rollback()
-            print('发生错误')
+        n = 0
+        cursor.execute(sql)
+        print('Count:', cursor.rowcount)  # 符合条件的数据条数
+
+        while n < cursor.rowcount:        #输出所有的数据
+            n += 1
+            row = cursor.fetchone()      #执行sql语句的结果,是个列表
+            str_date = row[0].strftime("%Y-%m-%d %H:%M:%S") #数据库获取的是时间戳
+            # print(type(str_date))
+            # print(str_date)
+            ws.append(
+                [str_date, row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9], row[10], row[11],
+                 row[12], row[13], row[14], row[15], row[16], row[17], row[18], row[19], row[20], row[21], row[22],
+                 row[23], row[24], row[25], row[26], row[27], row[28]])
+            print("%s已经导出%d条"%(name,n))
+        wb.save('C:/Users/lgx/Desktop/数据导出/{n}月开票明细/{company_name}/开票明细/{filename}.xlsx'.format(n=month,company_name=company_name,filename=name))
+        print('%s导出完毕!'%name)
+
 
 
 
