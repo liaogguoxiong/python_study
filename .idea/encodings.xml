@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" addBOMForNewFiles="with NO BOM">
+    <file url="file://$PROJECT_DIR$/excel操作/开票明细导出/input_file.txt" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/logging模块/out.log" charset="GBK" />
+  </component>
+</project>
